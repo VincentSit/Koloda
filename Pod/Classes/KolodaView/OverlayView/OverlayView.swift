@@ -15,9 +15,9 @@ public enum OverlayMode{
     case right
 }
 
-
+@objcMembers
 open class OverlayView: UIView {
     
     open var overlayState:OverlayMode = OverlayMode.none
-
+    
 }

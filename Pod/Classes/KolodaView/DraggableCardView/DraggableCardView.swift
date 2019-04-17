@@ -30,6 +30,7 @@ private let cardResetAnimationSpringSpeed: CGFloat = 20.0
 private let cardResetAnimationKey = "resetPositionAnimation"
 private let cardResetAnimationDuration: TimeInterval = 0.2
 
+@objcMembers
 open class DraggableCardView: UIView {
     
     weak var delegate: DraggableCardDelegate?
@@ -183,7 +184,7 @@ open class DraggableCardView: UIView {
     
     //MARK: GestureRecozniers
     
-    func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @objc func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
         xDistanceFromCenter = gestureRecognizer.translation(in: self).x
         yDistanceFromCenter = gestureRecognizer.translation(in: self).y
         
@@ -233,7 +234,7 @@ open class DraggableCardView: UIView {
         }
     }
     
-    func tapRecognized(_ recogznier: UITapGestureRecognizer) {
+    @objc func tapRecognized(_ recogznier: UITapGestureRecognizer) {
         delegate?.cardTapped(self)
     }
     
@@ -265,17 +266,17 @@ open class DraggableCardView: UIView {
         self.overlayView?.alpha = 1.0
         self.delegate?.cardSwippedInDirection(self, direction: SwipeResultDirection.right)
         UIView.animate(withDuration: cardSwipeActionAnimationDuration,
-            delay: 0.0,
-            options: .curveLinear,
-            animations: {
-                self.center = finishPoint
-                
-            },
-            completion: {
-                _ in
-                
-                self.dragBegin = false
-                self.removeFromSuperview()
+                       delay: 0.0,
+                       options: .curveLinear,
+                       animations: {
+                        self.center = finishPoint
+                        
+        },
+                       completion: {
+                        _ in
+                        
+                        self.dragBegin = false
+                        self.removeFromSuperview()
         })
     }
     
@@ -287,17 +288,17 @@ open class DraggableCardView: UIView {
         self.overlayView?.alpha = 1.0
         self.delegate?.cardSwippedInDirection(self, direction: SwipeResultDirection.left)
         UIView.animate(withDuration: cardSwipeActionAnimationDuration,
-            delay: 0.0,
-            options: .curveLinear,
-            animations: {
-                self.center = finishPoint
-                
-            },
-            completion: {
-                _ in
-                
-                self.dragBegin = false
-                self.removeFromSuperview()
+                       delay: 0.0,
+                       options: .curveLinear,
+                       animations: {
+                        self.center = finishPoint
+                        
+        },
+                       completion: {
+                        _ in
+                        
+                        self.dragBegin = false
+                        self.removeFromSuperview()
         })
     }
     
@@ -318,21 +319,21 @@ open class DraggableCardView: UIView {
         pop_add(resetPositionAnimation, forKey: cardResetAnimationKey)
         
         UIView.animate(withDuration: cardResetAnimationDuration,
-            delay: 0.0,
-            options: [.curveLinear, .allowUserInteraction],
-            animations: {
-                self.transform = CGAffineTransform(rotationAngle: 0)
-                self.overlayView?.alpha = 0
-                self.layoutIfNeeded()
-                
-                return
-            },
-            completion: {
-                _ in
-                
-                self.transform = CGAffineTransform.identity
-                
-                return
+                       delay: 0.0,
+                       options: [.curveLinear, .allowUserInteraction],
+                       animations: {
+                        self.transform = CGAffineTransform(rotationAngle: 0)
+                        self.overlayView?.alpha = 0
+                        self.layoutIfNeeded()
+                        
+                        return
+        },
+                       completion: {
+                        _ in
+                        
+                        self.transform = CGAffineTransform.identity
+                        
+                        return
         })
     }
     
@@ -344,20 +345,20 @@ open class DraggableCardView: UIView {
             let finishPoint = CGPoint(x: -UIScreen.main.bounds.width, y: center.y)
             self.delegate?.cardSwippedInDirection(self, direction: SwipeResultDirection.left)
             UIView.animate(withDuration: cardSwipeActionAnimationDuration,
-                delay: 0.0,
-                options: .curveLinear,
-                animations: {
-                    self.center = finishPoint
-                    self.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_4))
-                    
-                    return
-                },
-                completion: {
-                    _ in
-                    
-                    self.removeFromSuperview()
-                    
-                    return
+                           delay: 0.0,
+                           options: .curveLinear,
+                           animations: {
+                            self.center = finishPoint
+                            self.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_4))
+                            
+                            return
+            },
+                           completion: {
+                            _ in
+                            
+                            self.removeFromSuperview()
+                            
+                            return
             })
         }
     }
@@ -368,17 +369,17 @@ open class DraggableCardView: UIView {
             let finishPoint = CGPoint(x: UIScreen.main.bounds.width * 2, y: center.y)
             self.delegate?.cardSwippedInDirection(self, direction: SwipeResultDirection.right)
             UIView.animate(withDuration: cardSwipeActionAnimationDuration, delay: 0.0, options: .curveLinear, animations: {
-                    self.center = finishPoint
-                    self.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
-                    
-                    return
-                },
-                completion: {
-                    _ in
-                    
-                    self.removeFromSuperview()
-                    
-                    return
+                self.center = finishPoint
+                self.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
+                
+                return
+            },
+                           completion: {
+                            _ in
+                            
+                            self.removeFromSuperview()
+                            
+                            return
             })
         }
     }

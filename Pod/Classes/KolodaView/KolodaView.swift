@@ -62,6 +62,7 @@ private let kolodaAppearAlphaAnimationDuration: TimeInterval = 0.8
     @objc optional func kolodaDraggedCard(_ koloda: KolodaView, finishPercent: CGFloat, direction: SwipeResultDirection)
 }
 
+@objcMembers
 open class KolodaView: UIView, DraggableCardDelegate {
     
     open weak var dataSource: KolodaViewDataSource! {
@@ -152,7 +153,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func layoutDeck() {
+    @objc open func layoutDeck() {
         for (index, card) in self.visibleCards.enumerated() {
             card.frame = frameForCardAtIndex(UInt(index))
         }
@@ -276,19 +277,19 @@ open class KolodaView: UIView, DraggableCardDelegate {
         if visibleCards.count > 1 {
             
             UIView.animate(withDuration: backgroundCardFrameAnimationDuration,
-                delay: 0.0,
-                options: .curveLinear,
-                animations: {
-                    self.moveOtherCardsWithFinishPercent(0)
-                },
-                completion: {
-                    _ in
-                    self.animating = false
-                    
-                    for index in 1..<self.visibleCards.count {
-                        let card = self.visibleCards[index]
-                        card.alpha = self.alphaValueSemiTransparent
-                    }
+                           delay: 0.0,
+                           options: .curveLinear,
+                           animations: {
+                            self.moveOtherCardsWithFinishPercent(0)
+            },
+                           completion: {
+                            _ in
+                            self.animating = false
+                            
+                            for index in 1..<self.visibleCards.count {
+                                let card = self.visibleCards[index]
+                                card.alpha = self.alphaValueSemiTransparent
+                            }
             })
         } else {
             animating = false
