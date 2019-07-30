@@ -30,7 +30,7 @@ private let cardResetAnimationSpringSpeed: CGFloat = 20.0
 private let cardResetAnimationKey = "resetPositionAnimation"
 private let cardResetAnimationDuration: TimeInterval = 0.2
 
-@objcMembers
+@objcMembers 
 open class DraggableCardView: UIView {
     
     weak var delegate: DraggableCardDelegate?
@@ -107,34 +107,34 @@ open class DraggableCardView: UIView {
             
             let width = NSLayoutConstraint(
                 item: overlay,
-                attribute: NSLayoutAttribute.width,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.width,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: self,
-                attribute: NSLayoutAttribute.width,
+                attribute: NSLayoutConstraint.Attribute.width,
                 multiplier: 1.0,
                 constant: 0)
             let height = NSLayoutConstraint(
                 item: overlay,
-                attribute: NSLayoutAttribute.height,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.height,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: self,
-                attribute: NSLayoutAttribute.height,
+                attribute: NSLayoutConstraint.Attribute.height,
                 multiplier: 1.0,
                 constant: 0)
             let top = NSLayoutConstraint (
                 item: overlay,
-                attribute: NSLayoutAttribute.top,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.top,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: self,
-                attribute: NSLayoutAttribute.top,
+                attribute: NSLayoutConstraint.Attribute.top,
                 multiplier: 1.0,
                 constant: 0)
             let leading = NSLayoutConstraint (
                 item: overlay,
-                attribute: NSLayoutAttribute.leading,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.leading,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: self,
-                attribute: NSLayoutAttribute.leading,
+                attribute: NSLayoutConstraint.Attribute.leading,
                 multiplier: 1.0,
                 constant: 0)
             addConstraints([width,height,top,leading])
@@ -147,34 +147,34 @@ open class DraggableCardView: UIView {
             
             let width = NSLayoutConstraint(
                 item: contentView,
-                attribute: NSLayoutAttribute.width,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.width,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: self,
-                attribute: NSLayoutAttribute.width,
+                attribute: NSLayoutConstraint.Attribute.width,
                 multiplier: 1.0,
                 constant: 0)
             let height = NSLayoutConstraint(
                 item: contentView,
-                attribute: NSLayoutAttribute.height,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.height,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: self,
-                attribute: NSLayoutAttribute.height,
+                attribute: NSLayoutConstraint.Attribute.height,
                 multiplier: 1.0,
                 constant: 0)
             let top = NSLayoutConstraint (
                 item: contentView,
-                attribute: NSLayoutAttribute.top,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.top,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: self,
-                attribute: NSLayoutAttribute.top,
+                attribute: NSLayoutConstraint.Attribute.top,
                 multiplier: 1.0,
                 constant: 0)
             let leading = NSLayoutConstraint (
                 item: contentView,
-                attribute: NSLayoutAttribute.leading,
-                relatedBy: NSLayoutRelation.equal,
+                attribute: NSLayoutConstraint.Attribute.leading,
+                relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: self,
-                attribute: NSLayoutAttribute.leading,
+                attribute: NSLayoutConstraint.Attribute.leading,
                 multiplier: 1.0,
                 constant: 0)
             
@@ -266,17 +266,17 @@ open class DraggableCardView: UIView {
         self.overlayView?.alpha = 1.0
         self.delegate?.cardSwippedInDirection(self, direction: SwipeResultDirection.right)
         UIView.animate(withDuration: cardSwipeActionAnimationDuration,
-                       delay: 0.0,
-                       options: .curveLinear,
-                       animations: {
-                        self.center = finishPoint
-                        
-        },
-                       completion: {
-                        _ in
-                        
-                        self.dragBegin = false
-                        self.removeFromSuperview()
+            delay: 0.0,
+            options: .curveLinear,
+            animations: {
+                self.center = finishPoint
+                
+            },
+            completion: {
+                _ in
+                
+                self.dragBegin = false
+                self.removeFromSuperview()
         })
     }
     
@@ -288,17 +288,17 @@ open class DraggableCardView: UIView {
         self.overlayView?.alpha = 1.0
         self.delegate?.cardSwippedInDirection(self, direction: SwipeResultDirection.left)
         UIView.animate(withDuration: cardSwipeActionAnimationDuration,
-                       delay: 0.0,
-                       options: .curveLinear,
-                       animations: {
-                        self.center = finishPoint
-                        
-        },
-                       completion: {
-                        _ in
-                        
-                        self.dragBegin = false
-                        self.removeFromSuperview()
+            delay: 0.0,
+            options: .curveLinear,
+            animations: {
+                self.center = finishPoint
+                
+            },
+            completion: {
+                _ in
+                
+                self.dragBegin = false
+                self.removeFromSuperview()
         })
     }
     
@@ -319,21 +319,21 @@ open class DraggableCardView: UIView {
         pop_add(resetPositionAnimation, forKey: cardResetAnimationKey)
         
         UIView.animate(withDuration: cardResetAnimationDuration,
-                       delay: 0.0,
-                       options: [.curveLinear, .allowUserInteraction],
-                       animations: {
-                        self.transform = CGAffineTransform(rotationAngle: 0)
-                        self.overlayView?.alpha = 0
-                        self.layoutIfNeeded()
-                        
-                        return
-        },
-                       completion: {
-                        _ in
-                        
-                        self.transform = CGAffineTransform.identity
-                        
-                        return
+            delay: 0.0,
+            options: [.curveLinear, .allowUserInteraction],
+            animations: {
+                self.transform = CGAffineTransform(rotationAngle: 0)
+                self.overlayView?.alpha = 0
+                self.layoutIfNeeded()
+                
+                return
+            },
+            completion: {
+                _ in
+                
+                self.transform = CGAffineTransform.identity
+                
+                return
         })
     }
     
@@ -345,20 +345,20 @@ open class DraggableCardView: UIView {
             let finishPoint = CGPoint(x: -UIScreen.main.bounds.width, y: center.y)
             self.delegate?.cardSwippedInDirection(self, direction: SwipeResultDirection.left)
             UIView.animate(withDuration: cardSwipeActionAnimationDuration,
-                           delay: 0.0,
-                           options: .curveLinear,
-                           animations: {
-                            self.center = finishPoint
-                            self.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_4))
-                            
-                            return
-            },
-                           completion: {
-                            _ in
-                            
-                            self.removeFromSuperview()
-                            
-                            return
+                delay: 0.0,
+                options: .curveLinear,
+                animations: {
+                    self.center = finishPoint
+                    self.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_4))
+                    
+                    return
+                },
+                completion: {
+                    _ in
+                    
+                    self.removeFromSuperview()
+                    
+                    return
             })
         }
     }
@@ -369,17 +369,17 @@ open class DraggableCardView: UIView {
             let finishPoint = CGPoint(x: UIScreen.main.bounds.width * 2, y: center.y)
             self.delegate?.cardSwippedInDirection(self, direction: SwipeResultDirection.right)
             UIView.animate(withDuration: cardSwipeActionAnimationDuration, delay: 0.0, options: .curveLinear, animations: {
-                self.center = finishPoint
-                self.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
-                
-                return
-            },
-                           completion: {
-                            _ in
-                            
-                            self.removeFromSuperview()
-                            
-                            return
+                    self.center = finishPoint
+                    self.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
+                    
+                    return
+                },
+                completion: {
+                    _ in
+                    
+                    self.removeFromSuperview()
+                    
+                    return
             })
         }
     }
